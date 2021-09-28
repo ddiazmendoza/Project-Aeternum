@@ -4,33 +4,71 @@ using UnityEngine;
 
 namespace Aeternum
 {
+    public static class GalaxyConfig
+    {
+        // This gets filled out by some kind of "New Game" screen
+        // and is used by the Generate function to tune the game parameters
+        public static int NumPlayers = 8;
+        public static int NumStars = 50;
+
+        // Total width/height of the range of star positions in Unity world units
+        public static int GalaxyWidth = 100;
+
+        // Consider reading the defaults from a config file
+    }
     public class Galaxy 
     {
-        public List<StarSystem> StarSystems = new List<StarSystem>();
-        public int MaxStars = 10;
-
         public Galaxy()
         {
-            Generate(MaxStars);
+            StarSystems = new List<StarSystem>();
         }
-        // Start is called before the first frame update
-        void Start()
+
+        private List<StarSystem> StarSystems;
+
+        public StarSystem GetStarSystem(int StarSystemId)
+        {
+            return StarSystems[StarSystemId];
+        }
+
+        public int GetNumStarSystems()
+        {
+            return StarSystems.Count;
+        }
+
+        public void Generate(  )
+        {
+            // First pass, just make some random stars for us.
+
+            int galaxyWidth = GalaxyConfig.GalaxyWidth;
+
+            for (int i = 0; i < GalaxyConfig.NumStars; i++)
+            {
+                StarSystem ss = new StarSystem();
+                ss.Position = new Vector3(
+                        Random.Range(-galaxyWidth / 2, galaxyWidth / 2),
+                        Random.Range(-galaxyWidth / 2, galaxyWidth / 2),
+                        0
+                    );
+                ss.Generate( /* Do we pass exactly what time of start system we want? */ );
+                // Player starting stars are special
+                // Do we want to vary star types based on distance from galactic center?
+
+                ss.Name = "Star " + i.ToString();
+
+                StarSystems.Add(ss);
+            }
+
+            Debug.Log("Num Stars Generated: " + StarSystems.Count);
+        }
+
+        public void Load( /* Some kind of file handle? */ )
         {
             
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Save( /* Some kind of file handle? */ )
         {
-            
-        } 
-        void Generate(int n) // n of stars to generate
-        {
-            for (int i = 0; i < n; i++) 
-            {
-                var ss = new StarSystem();
-                StarSystems.Add(ss);
-            }
+
         }
     }
 }

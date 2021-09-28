@@ -5,6 +5,7 @@ using UnityEngine;
 public class UniverseManager : MonoBehaviour
 {
     int Turn {get; set;}
+    bool gameHasStarted = false; 
     // Start is called before the first frame update
     void Start()
     {

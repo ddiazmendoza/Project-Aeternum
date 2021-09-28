@@ -13,6 +13,7 @@ namespace Aeternum
         private int starType; // 0 - main secuence yellow, positive = older , less rich negative = younger, less habitable
         private const int MaxPlanets = 6; // Later read from config file? Positins of planets [0] - null [1] - planet [2] - null ... etc.
         public Planet[] Planets;
+        public Vector3 Position;
         
         public StarSystem()
         {
@@ -22,6 +23,17 @@ namespace Aeternum
         {
             return Planets[planetIndex];
         }
+        public void Generate() 
+        {
+            GeneratePlanets();
+        }
+        public void GeneratePlanets() {
+            // Generate 0 to Max planets, weighting planet class based on
+            // StarType + distance from the Sun
+
+            // The StarType might also influence the likelihood of number
+            // of planets
+        } 
 
     }
 }
