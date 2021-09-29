@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Aeternum
 {
-    public enum PlanetType {Lava, Ice, Contintental, GasGigant, GaiaWorld, IslesWorld, OceanWorld}
-    public enum PlanetTraits {Industrial, Natives, GoldDeposit, ArtifactWorld}
     public class PlanetGraphic 
     {
 
@@ -14,6 +12,7 @@ namespace Aeternum
         public PlanetGraphic PlanetGraphic;
         public string Name; 
         readonly int PlanetIndex; 
+        public PlanetSize PlanetSize;
         public PlanetType Type {get; set;}
         public Colony Colony {get; set;}
         public bool hasColony { set {

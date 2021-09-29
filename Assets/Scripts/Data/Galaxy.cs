@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace Aeternum
 {
+    public enum PlanetNames {Kepler, Casiopeia, Orion, Sirius, COUNT}
+    public enum StarNames { Vega, Alpha, Beta, Gamma }
+    public enum PlanetType {Lava, Ice, Contintental, GasGigant, GaiaWorld, IslesWorld, OceanWorld}
+    public enum PlanetTraits {Industrial, Natives, GoldDeposit, ArtifactWorld}
+    public enum PlanetSize {Tiny, Small, Normal, Large, Huge, COUNT}
+
     public static class GalaxyConfig
     {
         // This gets filled out by some kind of "New Game" screen
