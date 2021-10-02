@@ -6,7 +6,7 @@ namespace Aeternum
 {
     public class ViewManager : MonoBehaviour 
     {
-
+        // test from mac
         private void OnEnable()
         {
             Instance = this;
