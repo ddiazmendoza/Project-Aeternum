@@ -7,12 +7,17 @@ namespace Aeternum
 {
     public class UniverseManager : MonoBehaviour
     {
+        // This script is responsible for holding the main Galaxy data object,
+        // triggering file save/loads or triggering the generation of a new galaxy.
+
+        // Maybe also gets callbacks from end turn button?
         [SerializeField]
         public int Turn;
 
         [SerializeField]
         public bool gameHasStarted = false; 
-        public Text text; 
+        public Text turnText; 
+        private Galaxy galaxy;
         void Start()
         {
            StartGame();
@@ -22,8 +27,17 @@ namespace Aeternum
         // Update is called once per frame
         void Update()
         {
-           text.text = Turn.ToString();
+           turnText.text = Turn.ToString();
         }
+        public void Generate() 
+        {
+            Debug.Log("UniverseManager::Generate -- Generating a new Galaxy");
+            galaxy = new Galaxy();
+            galaxy.Generate();
+
+            // tell our visual system to spawn the graphics
+            
+        } 
         public void StartGame() 
         {
             gameHasStarted = true;

@@ -21,36 +21,10 @@ namespace Aeternum
         
         public double PlanetIncome {get; set;}
         public double PlanetProduction {get; set;}
+
+        // Planet traits might become a class that can apply their own logic?
         public List<PlanetTraits> PlanetTraits; 
 
-        public Planet()
-        {
 
-        }
-        // Start is called before the first frame update
-        void Start()
-        {
-            if (this.Colony != null) // We have a colony in here 
-            {
-
-            }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
-        public void Generate(int n) 
-        {
-            for (int i = 0; i < n; i++) 
-            {
-
-            }
-        }
-        public struct Territory 
-        {
-            
-        }
     }
 }

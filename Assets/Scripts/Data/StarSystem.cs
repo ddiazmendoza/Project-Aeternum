@@ -6,27 +6,28 @@ namespace Aeternum
 {
     public class StarSystemGraphics 
     {
+        // int?  string?  sprite? texture?  model
+        // do we maintain animation data?
         GameObject starSystemGraph; 
     }
     public class StarSystem 
     {
         public string Name; 
-        private int starType; // 0 - main secuence yellow, positive = older , less rich negative = younger, less habitable
+        public int StarType {get; private set;}     // 0 - main secuence yellow, positive = older , less rich negative = younger, less habitable
+        public Vector3 Position;
+        public StarSystemGraphics StarSystemGraphics;
+        private int starType; 
         private const int MaxPlanets = 6; // Later read from config file? Positins of planets [0] - null [1] - planet [2] - null ... etc.
         private Planet[] planets;
-        public Vector3 Position;
         
         public StarSystem()
         {
             planets = new Planet[MaxPlanets];
         }
-        public Planet GetPlanet(int planetIndex) 
-        {
-            return planets[planetIndex];
-        }
         public void Generate() // When we generate SS each of them generates planets
         {
-            
+            this.StarType = starType;
+            GeneratePlanets();
         }
         public void GeneratePlanets() {
             // Generate 0 to Max planets, weighting planet class based on
@@ -51,6 +52,27 @@ namespace Aeternum
                 }
             }
         } 
+        public Planet GetPlanet(int planetIndex) 
+        {
+            return planets[planetIndex];
+        } // I know it's the same... 
+        public Planet GetPlanetAtIndex(int i) 
+        {
+            return planets[i];
+        }
+        public int GetNumPlanets() 
+        {
+            int c = 0;
+            for (var i = 0; i < GetMaxPlanets(); i++)
+            {
+                if (planets[i] != null)
+                {
+                    c++;
+                }
+                
+            }
+            return c;
+        }
         public int GetMaxPlanets() 
         {
             return Config.GetInt("STAR_MAX_PLANETS");
@@ -59,6 +81,39 @@ namespace Aeternum
         {
             // TODO: Make awesome
             return Name + " " + (pos + 1).ToString();
+        }
+        private PlanetType GeneratePlanetType(int pos) 
+        {
+            // Tweak this based on star type and galaxy settings 
+            float goldilocksRange = 0.5f;
+
+            float distance = (float)pos / (float)GetMaxPlanets();
+            float distanceSquared = distance *distance;
+
+            float gasGiantWeight = Mathf.Lerp(0f, 1f, distanceSquared);
+            float goldilocksWeight = Mathf.Lerp(1f, 0f, 2f * Mathf.Abs(goldilocksRange - distance));
+            float asteroidWeight = 1.0f;
+
+            // Cool suns should have goldilocks closer to the sun
+            // Hot suns should have it further
+
+            float allWeights = gasGiantWeight + goldilocksWeight + asteroidWeight;
+            float r = UnityEngine.Random.Range(0, allWeights);
+
+            if (r < gasGiantWeight) 
+            {
+                // TODO
+                return PlanetType.GasGigant;
+            }
+            r -= gasGiantWeight;
+            if (r < goldilocksWeight) 
+            {
+                // TODO 
+                return PlanetType.Contintental;
+            }
+            r -= goldilocksWeight;
+            // If we get here, it's because we rolled in the asteroid weight
+            return PlanetType.Asteroid;
         }
         public void Load( /* Some kind of file handle? */ )
         {
