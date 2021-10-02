@@ -36,6 +36,7 @@ namespace Aeternum
             galaxy.Generate();
 
             // tell our visual system to spawn the graphics
+            ViewManager.Instance.GalaxyVisuals.InitiateVisuals(galaxy);
             
         } 
         public void StartGame() 
