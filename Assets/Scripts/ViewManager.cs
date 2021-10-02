@@ -10,7 +10,7 @@ namespace Aeternum
         private void OnEnable()
         {
             Instance = this;
-        }
+        } 
 
         public static ViewManager Instance { get; set; }
 

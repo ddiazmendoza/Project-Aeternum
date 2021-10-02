@@ -18,6 +18,7 @@ namespace Aeternum
         public bool gameHasStarted = false; 
         public Text turnText; 
         private Galaxy galaxy;
+
         void Start()
         {
            StartGame();
@@ -31,9 +32,10 @@ namespace Aeternum
         }
         public void Generate() 
         {
-            Debug.Log("UniverseManager::Generate -- Generating a new Galaxy");
+            
             galaxy = new Galaxy();
             galaxy.Generate();
+            Debug.Log("UniverseManager::Generate -- Generating a new Galaxy");
 
             // tell our visual system to spawn the graphics
             ViewManager.Instance.GalaxyVisuals.InitiateVisuals(galaxy);
@@ -44,6 +46,7 @@ namespace Aeternum
             gameHasStarted = true;
             Debug.Log("game started");
             Turn = 1;
+            Generate();
         }
         public void SolveNextTurn() 
         {

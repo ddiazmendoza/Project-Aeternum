@@ -14,11 +14,10 @@ namespace Aeternum
         // This gets filled out by some kind of "New Game" screen
         // and is used by the Generate function to tune the game parameters
         public static int NumPlayers = 8;
-        public static int NumStars = 50;
+        public static int NumStars = 100;
 
         // Total width/height of the range of star positions in Unity world units
-        public static int GalaxyWidth = 100;
-
+        public  const int GalaxyWidth = 100;
         // Consider reading the defaults from a config file
     }
     public class Galaxy 
