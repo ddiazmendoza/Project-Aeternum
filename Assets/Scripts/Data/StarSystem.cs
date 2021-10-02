@@ -13,10 +13,14 @@ namespace Aeternum
     public class StarSystem 
     {
         public string Name; 
+
+        const int MIN_STAR_TYPE = -2;    // Not pleased with this
+        const int MAX_STAR_TYPE =  2;
         public int StarType {get; private set;}     // 0 - main secuence yellow, positive = older , less rich negative = younger, less habitable
+
         public Vector3 Position;
         public StarSystemGraphics StarSystemGraphics;
-        private int starType; 
+
         private const int MaxPlanets = 6; // Later read from config file? Positins of planets [0] - null [1] - planet [2] - null ... etc.
         private Planet[] planets;
         
@@ -24,7 +28,7 @@ namespace Aeternum
         {
             planets = new Planet[MaxPlanets];
         }
-        public void Generate() // When we generate SS each of them generates planets
+        public void Generate(int starType = 0 ) // Galactic age/richness info? Or maybe we get told what kind of star to generate?  Especially for player starting planets? 
         {
             this.StarType = starType;
             GeneratePlanets();
@@ -76,6 +80,12 @@ namespace Aeternum
         public int GetMaxPlanets() 
         {
             return Config.GetInt("STAR_MAX_PLANETS");
+        }
+        public int GetStarTypeIndex()
+        {
+            // Weird hacky function to convert from -2...+2 range to a 0...4 range
+
+            return StarType - MIN_STAR_TYPE;
         }
         public string GeneratePlanetName(int pos) 
         {

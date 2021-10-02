@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+
 namespace Aeternum 
 {
     public class ViewManager : MonoBehaviour 
