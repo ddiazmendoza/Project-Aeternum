@@ -19,6 +19,7 @@ namespace Aeternum
             ViewManager.Instance.SystemView.StarSystem = StarSystem;
             ViewManager.Instance.ShowView( ViewManager.Instance.SystemView );
         }
+        
     }
 }
     

@@ -14,7 +14,7 @@ namespace Aeternum
     {
         public string Name; 
 
-        const int MIN_STAR_TYPE = -2;    // Not pleased with this
+        const int MIN_STAR_TYPE = 0;    // Not pleased with this
         const int MAX_STAR_TYPE =  2;
         public int StarType {get; private set;}     // 0 - main secuence yellow, positive = older , less rich negative = younger, less habitable
 

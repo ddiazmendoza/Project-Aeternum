@@ -6,7 +6,6 @@ namespace Aeternum
 {
     public class ViewManager : MonoBehaviour 
     {
-        // test from mac
         private void OnEnable()
         {
             Instance = this;
@@ -16,6 +15,7 @@ namespace Aeternum
 
         public GalaxyVisuals GalaxyVisuals;
         public SystemView SystemView;
+        public GameObject Menu;
 
         // Update is called once per frame
         void Update () {
@@ -24,6 +24,8 @@ namespace Aeternum
             {
                 // back out of views one step at a time
                 // if in the master view (Galaxy), then instead open the game menu
+                Menu.SetActive(true);
+                
             }
 
         }

@@ -5,39 +5,34 @@ using UnityEngine.UI;
 using Aeternum;
 
 public class GalaxyVisuals : MonoBehaviour {
-
-
     public LayerMask ClickableStarsLayerMask;
 
     // Update is called once per frame
-    void Update () {
-		
-        if( Input.GetMouseButtonUp(0) )
+    void Update () 
+    {
+        if ( Input.GetMouseButtonUp(0) )
         {
-           // Mouse was clicked -- is it on a star?
+            Debug.Log("mouse clicked");
+            // Mouse was clicked -- is it on a star?
 
-           // TODO:  Ignore clicks if over a UI element
+            // TODO:  Ignore clicks if over a UI element
 
-           Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-           RaycastHit hitInfo;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
 
-           if( Physics.Raycast(ray, out hitInfo, ClickableStarsLayerMask )  )
-           {
-               // We hit something, and that something can ONLY be a clickable star
-               ClickableStar cs = hitInfo.collider.GetComponentInParent<ClickableStar>();
+            if (Physics.Raycast(ray, out hitInfo, ClickableStarsLayerMask))
+            {
+                Debug.Log("we hit a star...");
+                // We hit something, and that something can ONLY be a clickable star
+                ClickableStar cs = hitInfo.collider.GetComponentInParent<ClickableStar>();
 
-               if(cs == null)
-               {
-                   Debug.LogError("Our star doesn't have a ClickableStar component?");
-                   return;
-               }
+                Debug.Log("Clicked star: " + cs.name);
 
-               Debug.Log("Clicked star: " + cs.name);
-
-               ViewManager.Instance.SystemView.StarSystem = cs.StarSystem;
-               ViewManager.Instance.ShowView( ViewManager.Instance.SystemView );
-           }
+                cs.OnClick();
+            }
         }
+		
+        
 
 	}
 
@@ -55,7 +50,7 @@ public class GalaxyVisuals : MonoBehaviour {
             StarSystem ss = galaxy.GetStarSystem(i);
 
             GameObject go = Instantiate(
-                StarPrefabs[ss.GetStarTypeIndex()],
+                StarPrefabs[0],
                 ss.Position,       // Are we gonna want to mult by a scalar? maybe not actually
                 Quaternion.identity,
                 this.transform

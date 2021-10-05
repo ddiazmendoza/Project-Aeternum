@@ -49,7 +49,7 @@ namespace Aeternum
                         Random.Range(-galaxyWidth / 2, galaxyWidth / 2),
                         0
                     );
-                ss.Generate( /* Do we pass exactly what time of start system we want? */ );
+                ss.Generate( /* Do we pass exactly what type of start system we want? */ );
                 // Player starting stars are special
                 // Do we want to vary star types based on distance from galactic center?
 
