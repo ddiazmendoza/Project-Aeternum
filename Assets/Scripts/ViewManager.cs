@@ -24,6 +24,10 @@ namespace Aeternum
             {
                 // back out of views one step at a time
                 // if in the master view (Galaxy), then instead open the game menu
+                if (Menu.activeSelf) 
+                {
+                    Menu.SetActive(false);
+                }
                 Menu.SetActive(true);
                 
             }

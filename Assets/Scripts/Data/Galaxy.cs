@@ -14,10 +14,11 @@ namespace Aeternum
         // This gets filled out by some kind of "New Game" screen
         // and is used by the Generate function to tune the game parameters
         public static int NumPlayers = 8;
-        public static int NumStars = 20;
+        public static int NumStars = 100;
 
         // Total width/height of the range of star positions in Unity world units
         public  const int GalaxyWidth = 100;
+        public  const int GalaxyHeight = 100;
         // Consider reading the defaults from a config file
     }
     public class Galaxy 
@@ -40,13 +41,14 @@ namespace Aeternum
             // First pass, just make some random stars for us.
 
             int galaxyWidth = GalaxyConfig.GalaxyWidth;
+            int galaxyHeight = GalaxyConfig.GalaxyHeight;
 
             for (int i = 0; i < GalaxyConfig.NumStars; i++)
             {
                 StarSystem ss = new StarSystem();
                 ss.Position = new Vector3(
-                        Random.Range(-galaxyWidth / 2, galaxyWidth / 2),
-                        Random.Range(-galaxyWidth / 2, galaxyWidth / 2),
+                        Random.Range(-galaxyWidth, galaxyWidth),
+                        Random.Range(-galaxyHeight / 2, galaxyHeight / 2),
                         1
                     );
                 ss.Generate( /* Do we pass exactly what type of start system we want? */ );

@@ -9,6 +9,7 @@ namespace Aeternum
         private void Start()
         {
             GetComponentInChildren<TextMeshProUGUI>().text = StarSystem.Name;
+            
         }
 
         public StarSystem StarSystem;

@@ -5,7 +5,7 @@ namespace Aeternum
 {
     public static class Config 
     {
-                public static int GetInt(string parameter) 
+        public static int GetInt(string parameter) 
         {
             switch (parameter)
             {

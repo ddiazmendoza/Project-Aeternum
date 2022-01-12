@@ -25,14 +25,14 @@ namespace Aeternum
                 // TODO:  Ignore clicks if over a UI element
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hitInfo;
-                Debug.Log(ray.origin.ToString() + " " + ray.direction.ToString());
-                Debug.DrawRay(ray.origin, ray.direction * 10, Color.magenta, 13f);
                 
                 bool didHit = Physics.Raycast(ray, out hitInfo, 100f, ClickableStarsLayerMask);
 
                 if (didHit)
                 {
-                    Debug.Log(hitInfo.collider.name);
+                    ClickableStar cs = hitInfo.collider.GetComponentInParent<ClickableStar>();
+                    cs.OnClick();
+                    //Debug.DrawRay(ray.origin, ray.direction * 10, Color.magenta);
                 }
             }
         }

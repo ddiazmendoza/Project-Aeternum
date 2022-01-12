@@ -6,16 +6,17 @@ using Aeternum;
 namespace Aeternum 
 {
     public class SystemView : MonoBehaviour {
+        public Text text; 
 
         private void OnEnable()
         {
             Debug.Log("SystemView::OnEnable -- " + StarSystem.Name);
-
+            text.text = StarSystem.Name;
             // Update various UI elements for this system
 
 
             // Setup the system render view so we can see planets
-            SpawnRenderables();
+            SpawnPlanets();
         }
 
         private void OnDisable()
@@ -43,7 +44,7 @@ namespace Aeternum
         void Update () {
         }
 
-        void SpawnRenderables()
+        void SpawnPlanets()
         {
             // Spawn our star
             GameObject go;
@@ -57,7 +58,7 @@ namespace Aeternum
             {
                 orbitDistance += Config.GetFloat("STAR_ORBIT_DISTANCE");
                 Planet p = StarSystem.GetPlanetAtIndex(i);
-                if(p == null)
+                if (p == null)
                 {
                     continue;
                 }

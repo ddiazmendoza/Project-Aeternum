@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace Aeternum 
 {
     public class UniverseManager : MonoBehaviour
@@ -18,6 +19,9 @@ namespace Aeternum
         public bool gameHasStarted = false; 
         public Text turnText; 
         private Galaxy galaxy;
+
+        [SerializeField]
+        public Player Player {get; set;}
 
         void Start()
         {
@@ -47,10 +51,16 @@ namespace Aeternum
             Debug.Log("game started");
             Turn = 1;
             Generate();
+            Player = new Player();
+            
         }
         public void SolveNextTurn() 
         {
+            
+            // Solve economy income/outcome
+            
             Turn++;
+            Player.Economics.SolveNextTurn();
         }
     }
 }
